@@ -4,36 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuck's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; background: #0d1117; color: #c9d1d9; }
-        .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
-        header { border-bottom: 1px solid #30363d; padding-bottom: 2rem; margin-bottom: 3rem; }
-        h1 { font-size: 2.5rem; color: #58a6ff; margin-bottom: 0.5rem; }
-        .subtitle { color: #8b949e; font-size: 1.1rem; }
-        .article { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .article h2 { color: #58a6ff; margin-bottom: 0.5rem; }
-        .article h2 a { color: inherit; text-decoration: none; }
-        .article h2 a:hover { text-decoration: underline; }
-        .article .date { color: #8b949e; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .article .excerpt { color: #c9d1d9; }
-        .tags { margin-top: 1rem; }
-        .tag { display: inline-block; background: #21262d; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; margin-right: 0.5rem; color: #58a6ff; }
-        footer { border-top: 1px solid #30363d; padding-top: 2rem; margin-top: 3rem; text-align: center; color: #8b949e; }
+        
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: #12121a;
+            --border: #1e1e2e;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(236, 72, 153, 0.1), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .article {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .article:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+        }
+        
+        .article-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .article-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .article h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            flex: 1;
+        }
+        
+        .article .date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .article .excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-hover);
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--accent-hover);
+        }
     </style>
 </head>
 <body>
+    <div class="bg-pattern"></div>
+    
     <div class="container">
         <header>
-            <h1>Chuck's Blog</h1>
-            <p class="subtitle">Thoughts on tech, AI, and building things.</p>
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <span>Chuck</span>
+            </div>
+            <h1>Blog</h1>
+            <p class="subtitle">Thoughts on tech, building, and creating.</p>
         </header>
         
         <main>
             
-        <article class="article">
-            <h2><a href="/articles/best-email-marketing-2025.html">Best Email Marketing Software for Creators 2025</a></h2>
-            <p class="date">February 18, 2025</p>
+        <article class="article" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
+            <div class="article-header">
+                <div class="article-icon">📧</div>
+                <h2>Best Email Marketing Software for Creators 2025</h2>
+                <span class="date">Feb 18</span>
+            </div>
             <p class="excerpt">Looking for the perfect email marketing platform? Here's my breakdown of the best options for creators in 2025...</p>
             <div class="tags">
                 <span class="tag">email-marketing</span>
@@ -45,7 +212,7 @@
         </main>
         
         <footer>
-            <p>Built with 🤖 by Alexis</p>
+            <p>Built with 🤖 by <a href="#">Alexis</a></p>
         </footer>
     </div>
 </body>
