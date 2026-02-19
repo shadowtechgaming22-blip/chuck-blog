@@ -3,268 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Email Marketing Software for Creators 2025 - Chuck's Blog</title>
+    <title>Best Email Marketing Software for Creators 2025 — Chuck's Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --bg: #0a0a0f;
-            --card-bg: #12121a;
+            --bg: #050507;
+            --bg-elevated: #0a0a0f;
+            --card-bg: #111118;
+            --card-hover: #161620;
             --border: #1e1e2e;
-            --text: #e4e4e7;
-            --text-muted: #71717a;
+            --border-hover: #2d2d44;
+            --text: #f1f1f4;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
             --accent: #6366f1;
-            --accent-hover: #818cf8;
-            --gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --accent-secondary: #a855f7;
+            --accent-tertiary: #ec4899;
+            --success: #22c55e;
+            --warning: #f59e0b;
         }
+        
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            line-height: 1.7;
             min-height: 100vh;
         }
         
-        .bg-pattern {
+        /* Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 102, 241, 0.1), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.06), transparent);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            33% { transform: translate(2%, 2%) rotate(1deg); opacity: 0.9; }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); opacity: 0.95; }
+        }
+        
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(236, 72, 153, 0.1), transparent);
+                linear-gradient(rgba(99, 102, 241, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
         }
         
-        .container {
-            max-width: 680px;
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(5, 5, 7, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 4rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-back:hover {
+            color: var(--accent);
+        }
+        
+        /* Article Container */
+        .article-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
             position: relative;
             z-index: 1;
         }
         
-        .back {
+        /* Article Header */
+        .article-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            transition: color 0.2s;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
         }
         
-        .back:hover {
-            color: var(--accent);
-        }
-        
-        .article-header {
-            margin-bottom: 2rem;
-        }
-        
-        h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 1rem;
+        .article-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
             line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #c7c7d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .meta {
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .article-meta span {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            gap: 0.4rem;
         }
         
-        .meta .tag {
-            background: rgba(99, 102, 241, 0.15);
-            color: var(--accent-hover);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
+        .reading-time {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
         }
         
+        /* Article Content */
         .article-content {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2.5rem;
+            border-radius: 24px;
+            padding: 3rem;
+        }
+        
+        .article-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .article-content p strong {
+            color: var(--text);
+            font-weight: 600;
         }
         
         .article-content h2 {
             color: white;
             font-size: 1.5rem;
+            font-weight: 700;
             margin: 2.5rem 0 1rem;
-            font-weight: 600;
+            letter-spacing: -0.01em;
         }
         
         .article-content h3 {
             color: white;
-            font-size: 1.2rem;
-            margin: 1.5rem 0 0.75rem;
+            font-size: 1.25rem;
             font-weight: 600;
-        }
-        
-        .article-content p {
-            color: var(--text);
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
+            margin: 2rem 0 0.75rem;
         }
         
         .article-content ul, .article-content ol {
-            margin: 1rem 0 1.5rem 1.5rem;
+            margin: 1.5rem 0 1.5rem 1.5rem;
         }
         
         .article-content li {
-            margin-bottom: 0.5rem;
-            color: var(--text);
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
         
         .article-content li strong {
-            color: white;
+            color: var(--text);
         }
         
-        .cta {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 12px;
-            padding: 1.75rem;
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.08));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
             margin: 2.5rem 0;
+            text-align: center;
         }
         
-        .cta h3 {
+        .cta-box h3 {
             color: white;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            margin-bottom: 0.5rem !important;
+            margin-top: 0 !important;
         }
         
-        .cta p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
+        .cta-box p {
+            margin-bottom: 1.25rem !important;
         }
         
         .btn {
-            display: inline-block;
-            background: var(--gradient);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.9rem 1.75rem;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
-            transition: opacity 0.2s;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
         }
         
         .btn:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
         }
         
+        /* Verdict Box */
         .verdict {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.04));
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 1.75rem;
             margin: 2rem 0;
         }
         
         .verdict h3 {
-            color: #4ade80;
-            margin-bottom: 0.5rem;
+            color: var(--success);
+            margin: 0 0 0.75rem 0 !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .verdict p {
-            margin-bottom: 0;
+            margin-bottom: 0 !important;
         }
         
-        footer {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 2rem;
+        /* Tags */
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
             border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.875rem;
         }
         
-        footer a {
+        .article-tags span {
+            background: rgba(99, 102, 241, 0.1);
             color: var(--accent);
-            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
         
-        footer a:hover {
-            color: var(--accent-hover);
+        /* Newsletter Section */
+        .article-newsletter {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
+        
+        .newsletter-box {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.05) 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        
+        .newsletter-box h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .newsletter-box p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.8rem 1.1rem;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .newsletter-form input:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .newsletter-form button {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.4rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+            
+            .article-wrapper {
+                padding: 7rem 1rem 2rem;
+            }
+            
+            .article-content {
+                padding: 1.75rem;
+                border-radius: 16px;
+            }
+            
+            .article-content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .article-content p {
+                font-size: 1rem;
+            }
+            
+            .cta-box, .verdict {
+                padding: 1.5rem;
+            }
+            
+            .article-newsletter {
+                padding: 0 1rem;
+            }
+            
+            .newsletter-box {
+                padding: 1.75rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
     
-    <div class="container">
-        <a href="/" class="back">← Back to Blog</a>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">⚡</div>
+                <span>Chuck</span>
+            </a>
+            <a href="/" class="nav-back">
+                ← Back to articles
+            </a>
+        </div>
+    </nav>
+    
+    <article class="article-wrapper">
+        <header class="article-hero fade-in">
+            <span class="article-badge">⭐ Featured</span>
+            <h1>Best Email Marketing Software for Creators 2025</h1>
+            <div class="article-meta">
+                <span>📅 February 18, 2025</span>
+                <span class="reading-time">⏱️ 8 min read</span>
+                <span>👁️ 1.2k views</span>
+            </div>
+        </header>
         
-        <article>
-            <div class="article-header">
-                <h1>Best Email Marketing Software for Creators 2025</h1>
-                <div class="meta">
-                    <span>February 18, 2025</span>
-                    <span class="tag">8 min read</span>
-                </div>
+        <div class="article-content fade-in">
+            <p>If you're a creator, blogger, or small business owner, you need an email marketing platform. But with so many options out there, how do you choose?</p>
+            
+            <p>After testing dozens of platforms, here's my breakdown of the best email marketing tools for creators in 2025.</p>
+            
+            <h2>1. ConvertKit (Best Overall for Creators)</h2>
+            <p>ConvertKit is purpose-built for creators. It's got everything you need to grow your list and monetize through email.</p>
+            
+            <ul>
+                <li><strong>Starting at:</strong> $9/month</li>
+                <li><strong>Best for:</strong> Podcasters, bloggers, course creators</li>
+                <li><strong>Key features:</strong> Visual automation builder, landing pages, commerce integrations</li>
+            </ul>
+            
+            <div class="cta-box">
+                <h3>🚀 Ready to start with ConvertKit?</h3>
+                <p>Get started today and join thousands of creators who trust ConvertKit for their email marketing.</p>
+                <a href="#" class="btn">
+                    Try ConvertKit Free
+                    <span>→</span>
+                </a>
             </div>
             
-            <div class="article-content">
-                <p>If you're a creator, blogger, or small business owner, you need an email marketing platform. But with so many options out there, how do you choose?</p>
-                
-                <p>After testing dozens of platforms, here's my breakdown of the best email marketing tools for creators in 2025.</p>
-                
-                <h2>1. ConvertKit (Best Overall for Creators)</h2>
-                <p>ConvertKit is purpose-built for creators. It's got everything you need to grow your list and monetize through email.</p>
-                <ul>
-                    <li><strong>Starting at:</strong> $9/month</li>
-                    <li><strong>Best for:</strong> Podcasters, bloggers, course creators</li>
-                    <li><strong>Key features:</strong> Visual automation builder, landing pages, commerce integrations</li>
-                </ul>
-                
-                <div class="cta">
-                    <h3>Ready to start?</h3>
-                    <p>Sign up through my affiliate link to support the blog:</p>
-                    <a href="#" class="btn">Get ConvertKit →</a>
-                </div>
-                
-                <h2>2. Beehiiv (Best for Newsletters)</h2>
-                <p>Beehiiv is the newcomer that's taking the newsletter world by storm. Built by the team behind Morning Brew.</p>
-                <ul>
-                    <li><strong>Starting at:</strong> Free (forever!)</li>
-                    <li><strong>Best for:</strong> Newsletter writers</li>
-                    <li><strong>Key features:</strong> Beautiful templates, scheduling, newsletter-specific features</li>
-                </ul>
-                
-                <h2>3. ActiveCampaign (Best for Automation)</h2>
-                <p>If you want serious automation power, ActiveCampaign is the beast.</p>
-                <ul>
-                    <li><strong>Starting at:</strong> $29/month</li>
-                    <li><strong>Best for:</strong> Advanced marketers</li>
-                    <li><strong>Key features:</strong> CRM, SMS, machine learning, complex automation</li>
-                </ul>
-                
-                <div class="verdict">
-                    <h3>Verdict</h3>
-                    <p>For most creators, <strong>ConvertKit</strong> is the sweet spot. It's affordable, powerful, and built for people like us.</p>
-                </div>
-                
-                <p>Want me to dive deeper into any of these? Let me know!</p>
+            <h2>2. Beehiiv (Best for Newsletters)</h2>
+            <p>Beehiiv is the newcomer that's taking the newsletter world by storm. Built by the team behind Morning Brew, it understands what newsletter writers need.</p>
+            
+            <ul>
+                <li><strong>Starting at:</strong> Free (forever!)</li>
+                <li><strong>Best for:</strong> Newsletter writers, journalists</li>
+                <li><strong>Key features:</strong> Beautiful templates, scheduling, newsletter-specific features, built-in monetization</li>
+            </ul>
+            
+            <h2>3. ActiveCampaign (Best for Automation)</h2>
+            <p>If you want serious automation power, ActiveCampaign is the beast. It's not just email marketing—it's a complete CRM and marketing automation platform.</p>
+            
+            <ul>
+                <li><strong>Starting at:</strong> $29/month</li>
+                <li><strong>Best for:</strong> Advanced marketers, e-commerce, B2B</li>
+                <li><strong>Key features:</strong> CRM, SMS, machine learning, complex automation workflows</li>
+            </ul>
+            
+            <h2>4. Mailchimp (Best for Beginners)</h2>
+            <p>The old reliable. Mailchimp has been around forever and still offers a solid, user-friendly experience for those just starting out.</p>
+            
+            <ul>
+                <li><strong>Starting at:</strong> Free (up to 500 contacts)</li>
+                <li><strong>Best for:</strong> Small businesses, beginners</li>
+                <li><strong>Key features:</strong> Easy drag-and-drop builder, lots of templates, good free tier</li>
+            </ul>
+            
+            <div class="verdict">
+                <h3>✅ The Verdict</h3>
+                <p>For most creators, <strong>ConvertKit</strong> hits the sweet spot. It's affordable, powerful, and built specifically for people like us. The visual automation builder alone is worth the price.</p>
             </div>
-        </article>
-        
-        <footer>
-            <p>Built with 🤖 by <a href="#">Alexis</a></p>
-        </footer>
-    </div>
+            
+            <h3>What I Use</h3>
+            <p>I personally use ConvertKit for this blog and my other projects. The simplicity combined with powerful features makes it perfect for my workflow.</p>
+            
+            <p>Want me to dive deeper into any of these platforms? Let me know in the comments or shoot me an email!</p>
+            
+            <div class="article-tags">
+                <span>email-marketing</span>
+                <span>creators</span>
+                <span>tools</span>
+                <span>2025</span>
+            </div>
+        </div>
+    </article>
+    
+    <section class="article-newsletter">
+        <div class="newsletter-box">
+            <h3>📬 Enjoyed this article?</h3>
+            <p>Join 2,000+ readers and get weekly insights on tech, tools, and building.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <span class="footer-text">© 2025 Chuck's Blog — Built with 💜</span>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="#">RSS</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuck's Blog</title>
+    <title>Chuck's Blog — Thoughts on Tech, Building & Creating</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --bg: #0a0a0f;
-            --card-bg: #12121a;
+            --bg: #050507;
+            --bg-elevated: #0a0a0f;
+            --card-bg: #111118;
+            --card-hover: #161620;
             --border: #1e1e2e;
-            --text: #e4e4e7;
-            --text-muted: #71717a;
+            --border-hover: #2d2d44;
+            --text: #f1f1f4;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
             --accent: #6366f1;
-            --accent-hover: #818cf8;
-            --gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --accent-secondary: #a855f7;
+            --accent-tertiary: #ec4899;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -27,123 +37,555 @@
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
-        .bg-pattern {
+        /* Animated Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 102, 241, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.08), transparent),
+                radial-gradient(ellipse 40% 30% at 20% 90%, rgba(236, 72, 153, 0.06), transparent);
+            animation: bgPulse 15s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            33% { transform: translate(2%, 2%) rotate(1deg); opacity: 0.9; }
+            66% { transform: translate(-1%, 1%) rotate(-1deg); opacity: 0.95; }
+        }
+        
+        /* Grid Pattern Overlay */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 100%, rgba(236, 72, 153, 0.1), transparent);
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
         }
         
-        .container {
-            max-width: 680px;
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(5, 5, 7, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 0.75rem 2rem;
+            background: rgba(5, 5, 7, 0.95);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .logo {
-            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
         }
         
-        .logo-icon {
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-logo:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-logo-icon {
             width: 36px;
             height: 36px;
-            background: var(--gradient);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
         
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.75rem;
-            background: linear-gradient(to right, #fff, #a1a1aa);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
-        .article {
-            background: var(--card-bg);
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            margin-bottom: 1.25rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .article:hover {
-            border-color: rgba(99, 102, 241, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
         }
         
-        .article-header {
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            animation: fadeInUp 0.8s ease-out 0.5s both, bounce 2s infinite 1s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            margin-bottom: 0.75rem;
         }
         
-        .article-icon {
+        .section-title-icon {
             width: 40px;
             height: 40px;
-            background: rgba(99, 102, 241, 0.15);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
         }
         
-        .article h2 {
-            font-size: 1.25rem;
+        .view-all {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+        
+        .view-all:hover {
+            gap: 0.5rem;
+        }
+        
+        /* Featured Article */
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+        
+        .featured-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.05) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .featured-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+        }
+        
+        .featured-card:hover::before {
+            opacity: 1;
+        }
+        
+        .featured-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .featured-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+        
+        .featured-card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: white;
+        }
+        
+        .featured-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .featured-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .featured-image {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.15));
+            border-radius: 16px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        /* Articles Grid */
+        .articles-section {
+            margin-bottom: 4rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .article-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .article-card:hover {
+            background: var(--card-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .article-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .article-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .article-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        .article-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+        }
+        
+        .article-card h3 {
+            font-size: 1.15rem;
             font-weight: 600;
             color: white;
-            flex: 1;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
         }
         
-        .article .date {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .article .excerpt {
-            color: var(--text-muted);
+        .article-card p {
+            color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+        
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .tags {
@@ -154,66 +596,531 @@
         
         .tag {
             background: rgba(99, 102, 241, 0.1);
-            color: var(--accent-hover);
+            color: var(--accent);
             padding: 0.3rem 0.75rem;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 500;
+            transition: all 0.2s;
         }
         
-        footer {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border);
+        .tag:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        .read-time {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         
-        footer a {
-            color: var(--accent);
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.08) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1), transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .newsletter-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .newsletter-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        .newsletter-section p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.9rem 1.25rem;
+            color: var(--text);
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .newsletter-form input:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .newsletter-form button {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: white;
             text-decoration: none;
         }
         
-        footer a:hover {
-            color: var(--accent-hover);
+        .footer-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+            
+            main {
+                padding: 0 1rem 3rem;
+            }
+            
+            .featured-card {
+                grid-template-columns: 1fr;
+                padding: 1.75rem;
+            }
+            
+            .featured-image {
+                height: 200px;
+                order: -1;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+        }
+        
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
     
-    <div class="container">
-        <header>
-            <div class="logo">
-                <div class="logo-icon">⚡</div>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">⚡</div>
                 <span>Chuck</span>
+            </a>
+            <div class="nav-links">
+                <a href="#articles">Articles</a>
+                <a href="#newsletter">Newsletter</a>
+                <a href="#about">About</a>
+                <a href="#newsletter" class="nav-cta">Subscribe</a>
             </div>
-            <h1>Blog</h1>
-            <p class="subtitle">Thoughts on tech, building, and creating.</p>
-        </header>
-        
-        <main>
-            
-        <article class="article" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
-            <div class="article-header">
-                <div class="article-icon">📧</div>
-                <h2>Best Email Marketing Software for Creators 2025</h2>
-                <span class="date">Feb 18</span>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-badge">✨ Now with dark mode</div>
+        <h1>
+            Thoughts on <span class="gradient-text">tech</span>,<br>
+            building & creating
+        </h1>
+        <p class="hero-subtitle">
+            Exploring the intersection of technology, creativity, and entrepreneurship. 
+            Sharing lessons learned and tools discovered along the way.
+        </p>
+        <div class="hero-cta">
+            <a href="#articles" class="btn-primary">
+                Read Articles
+                <span>→</span>
+            </a>
+            <a href="#newsletter" class="btn-secondary">
+                <span>📬</span>
+                Subscribe
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <span>↓</span>
+        </div>
+    </section>
+    
+    <main>
+        <!-- Featured Article -->
+        <section class="featured-section reveal" id="featured">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <div class="section-title-icon">🔥</div>
+                    Featured
+                </h2>
             </div>
-            <p class="excerpt">Looking for the perfect email marketing platform? Here's my breakdown of the best options for creators in 2025...</p>
-            <div class="tags">
-                <span class="tag">email-marketing</span>
-                <span class="tag">creators</span>
-                <span class="tag">tools</span>
+            <article class="featured-card" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
+                <div class="featured-content">
+                    <span class="featured-label">⭐ Must Read</span>
+                    <h2>Best Email Marketing Software for Creators 2025</h2>
+                    <p>Looking for the perfect email marketing platform? After testing dozens of tools, here's my comprehensive breakdown of the best options for creators, bloggers, and entrepreneurs in 2025.</p>
+                    <div class="featured-meta">
+                        <span>📅 Feb 18, 2025</span>
+                        <span>⏱️ 8 min read</span>
+                        <span>👁️ 1.2k views</span>
+                    </div>
+                </div>
+                <div class="featured-image">📧</div>
+            </article>
+        </section>
+        
+        <!-- All Articles -->
+        <section class="articles-section reveal" id="articles">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <div class="section-title-icon">📝</div>
+                    Latest Articles
+                </h2>
+                <a href="#" class="view-all">View all →</a>
             </div>
-        </article>
+            <div class="articles-grid">
+                <article class="article-card" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
+                    <div class="article-header">
+                        <div class="article-icon">📧</div>
+                        <span class="article-date">Feb 18</span>
+                    </div>
+                    <h3>Best Email Marketing Software for Creators 2025</h3>
+                    <p>ConvertKit vs Beehiiv vs ActiveCampaign — which email platform should you choose as a creator? Here's the breakdown.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">email-marketing</span>
+                            <span class="tag">tools</span>
+                        </div>
+                        <span class="read-time">⏱️ 8 min</span>
+                    </div>
+                </article>
+                
+                <article class="article-card" onclick="window.location.href='#'">
+                    <div class="article-header">
+                        <div class="article-icon">🚀</div>
+                        <span class="article-date">Feb 15</span>
+                    </div>
+                    <h3>Building a SaaS in 30 Days: Lessons Learned</h3>
+                    <p>The complete journey from idea to first paying customers. What worked, what didn't, and what I'd do differently.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">saas</span>
+                            <span class="tag">startup</span>
+                        </div>
+                        <span class="read-time">⏱️ 12 min</span>
+                    </div>
+                </article>
+                
+                <article class="article-card" onclick="window.location.href='#'">
+                    <div class="article-header">
+                        <div class="article-icon">⚡</div>
+                        <span class="article-date">Feb 10</span>
+                    </div>
+                    <h3>The Modern Developer's Toolkit 2025</h3>
+                    <p>My essential tools, extensions, and workflows for productive development in the new year.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">devtools</span>
+                            <span class="tag">productivity</span>
+                        </div>
+                        <span class="read-time">⏱️ 6 min</span>
+                    </div>
+                </article>
+                
+                <article class="article-card" onclick="window.location.href='#'">
+                    <div class="article-header">
+                        <div class="article-icon">🎨</div>
+                        <span class="article-date">Feb 5</span>
+                    </div>
+                    <h3>Design Systems That Scale</h3>
+                    <p>How to build and maintain a design system that grows with your product and team.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">design</span>
+                            <span class="tag">ui/ux</span>
+                        </div>
+                        <span class="read-time">⏱️ 10 min</span>
+                    </div>
+                </article>
+                
+                <article class="article-card" onclick="window.location.href='#'">
+                    <div class="article-header">
+                        <div class="article-icon">🤖</div>
+                        <span class="article-date">Jan 28</span>
+                    </div>
+                    <h3>AI Tools That Actually Save Time</h3>
+                    <p>Cut through the hype. These are the AI-powered tools that have genuinely improved my workflow.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">ai</span>
+                            <span class="tag">automation</span>
+                        </div>
+                        <span class="read-time">⏱️ 7 min</span>
+                    </div>
+                </article>
+                
+                <article class="article-card" onclick="window.location.href='#'">
+                    <div class="article-header">
+                        <div class="article-icon">💰</div>
+                        <span class="article-date">Jan 20</span>
+                    </div>
+                    <h3>Monetizing Your Newsletter</h3>
+                    <p>From sponsorships to premium subscriptions — a practical guide to making money from your audience.</p>
+                    <div class="article-footer">
+                        <div class="tags">
+                            <span class="tag">monetization</span>
+                            <span class="tag">newsletter</span>
+                        </div>
+                        <span class="read-time">⏱️ 9 min</span>
+                    </div>
+                </article>
+            </div>
+        </section>
         
-        </main>
+        <!-- Newsletter -->
+        <section class="newsletter-section reveal" id="newsletter">
+            <div class="newsletter-content">
+                <div class="newsletter-icon">📬</div>
+                <h2>Join the newsletter</h2>
+                <p>Get the latest articles, tools, and insights delivered straight to your inbox. No spam, unsubscribe anytime.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left">
+                <a href="/" class="footer-logo">
+                    <div class="footer-logo-icon">⚡</div>
+                    <span>Chuck</span>
+                </a>
+                <span class="footer-text">© 2025 — Built with curiosity</span>
+            </div>
+            <div class="footer-links">
+                <a href="#articles">Articles</a>
+                <a href="#newsletter">Newsletter</a>
+                <a href="#">RSS</a>
+            </div>
+            <div class="social-links">
+                <a href="#" title="Twitter">𝕏</a>
+                <a href="#" title="GitHub">⌘</a>
+                <a href="#" title="LinkedIn">in</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
         
-        <footer>
-            <p>Built with 🤖 by <a href="#">Alexis</a></p>
-        </footer>
-    </div>
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // Article card click handlers
+        document.querySelectorAll('.article-card, .featured-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+    </script>
 </body>
 </html>
