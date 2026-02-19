@@ -3,45 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuck's Blog — Thoughts on Tech, Building & Creating</title>
+    <title>Chuck's Blog — Digital Chronicles & Creative Insights</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --bg: #050507;
-            --bg-elevated: #0a0a0f;
-            --card-bg: #111118;
-            --card-hover: #161620;
-            --border: #1e1e2e;
-            --border-hover: #2d2d44;
-            --text: #f1f1f4;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-            --accent: #6366f1;
-            --accent-secondary: #a855f7;
-            --accent-tertiary: #ec4899;
-            --success: #22c55e;
-            --warning: #f59e0b;
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111114;
+            --bg-elevated: #1a1a1f;
+            --card-bg: rgba(26, 26, 31, 0.8);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-magenta: #e91e8c;
+            --accent-pink: #f472b6;
+            --accent-purple: #a855f7;
+            --accent-coral: #fb7185;
+            --gradient-hero: linear-gradient(135deg, #e91e8c 0%, #a855f7 50%, #6366f1 100%);
+            --gradient-text: linear-gradient(135deg, #fff 0%, #f472b6 50%, #e91e8c 100%);
+            --shadow-glow: 0 0 60px rgba(233, 30, 140, 0.15);
+            --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            min-height: 100vh;
             overflow-x: hidden;
         }
         
-        /* Animated Background */
-        .bg-gradient {
+        /* ===== BACKGROUND EFFECTS ===== */
+        .ambient-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -52,98 +51,135 @@
             overflow: hidden;
         }
         
-        .bg-gradient::before {
-            content: '';
+        .ambient-blob {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 102, 241, 0.12), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(168, 85, 247, 0.08), transparent),
-                radial-gradient(ellipse 40% 30% at 20% 90%, rgba(236, 72, 153, 0.06), transparent);
-            animation: bgPulse 15s ease-in-out infinite;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
         }
         
-        @keyframes bgPulse {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-            33% { transform: translate(2%, 2%) rotate(1deg); opacity: 0.9; }
-            66% { transform: translate(-1%, 1%) rotate(-1deg); opacity: 0.95; }
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(233, 30, 140, 0.3) 0%, transparent 70%);
+            top: -10%;
+            right: -10%;
+            animation-delay: 0s;
         }
         
-        /* Grid Pattern Overlay */
-        .bg-grid {
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.25) 0%, transparent 70%);
+            bottom: 20%;
+            left: -10%;
+            animation-delay: -7s;
+        }
+        
+        .blob-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+            top: 50%;
+            right: 20%;
+            animation-delay: -14s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+        
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
         
-        /* Navigation */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(233, 30, 140, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(233, 30, 140, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+        
+        /* ===== NAVIGATION ===== */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 1rem 2rem;
-            background: rgba(5, 5, 7, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         nav.scrolled {
-            padding: 0.75rem 2rem;
-            background: rgba(5, 5, 7, 0.95);
+            padding: 1rem 3rem;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
         }
         
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .nav-logo {
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.2s;
+            gap: 0.75rem;
+            letter-spacing: -0.02em;
         }
         
-        .nav-logo:hover {
-            opacity: 0.8;
-        }
-        
-        .nav-logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            border-radius: 10px;
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-hero);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            font-size: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-mark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 100%);
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             align-items: center;
         }
         
@@ -152,23 +188,23 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.3s;
             position: relative;
         }
         
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -6px;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-            transition: width 0.3s;
+            background: var(--gradient-hero);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .nav-links a:hover {
-            color: var(--text);
+            color: var(--text-primary);
         }
         
         .nav-links a:hover::after {
@@ -176,294 +212,276 @@
         }
         
         .nav-cta {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            background: var(--gradient-hero);
             color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
             font-weight: 600;
             font-size: 0.85rem;
             text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(233, 30, 140, 0.3);
         }
         
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 30px rgba(233, 30, 140, 0.4);
         }
         
-        /* Hero Section */
+        /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 2rem 4rem;
+            padding: 8rem 3rem 4rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
         
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
+            gap: 0.75rem;
+            background: rgba(233, 30, 140, 0.1);
+            border: 1px solid rgba(233, 30, 140, 0.2);
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
             font-size: 0.85rem;
-            color: var(--accent);
+            color: var(--accent-pink);
             font-weight: 500;
             margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out;
+            width: fit-content;
         }
         
         .hero-badge::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--accent);
+            background: var(--accent-magenta);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse-glow 2s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(233, 30, 140, 0); }
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1;
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.1s both;
+            max-width: 900px;
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #c084fc 100%);
+        .hero h1 .highlight {
+            background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+        .hero-description {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
             color: var(--text-secondary);
             max-width: 600px;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             line-height: 1.7;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
-        .hero-cta {
+        .hero-stats {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--card-border);
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text);
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--border-hover);
-            transform: translateY(-3px);
-        }
-        
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+        .stat-item {
             display: flex;
             flex-direction: column;
-            align-items: center;
             gap: 0.5rem;
+        }
+        
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+        
+        .stat-value .accent {
+            color: var(--accent-magenta);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            animation: fadeInUp 0.8s ease-out 0.5s both, bounce 2s infinite 1s;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
         
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Main Content */
-        main {
+        /* ===== EDITORIAL GRID ===== */
+        .editorial-section {
+            padding: 6rem 3rem;
             position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
+            z-index: 2;
         }
         
-        /* Section Headers */
         .section-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
+            align-items: flex-end;
         }
         
         .section-title {
-            font-size: 1.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            letter-spacing: -0.03em;
         }
         
-        .section-title-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        .section-title .line {
+            display: block;
+        }
+        
+        .section-title .line.accent {
+            color: var(--accent-magenta);
         }
         
         .view-all {
-            color: var(--accent);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-            transition: gap 0.2s;
+            gap: 0.5rem;
+            transition: color 0.3s;
         }
         
         .view-all:hover {
-            gap: 0.5rem;
+            color: var(--accent-pink);
         }
         
-        /* Featured Article */
-        .featured-section {
-            margin-bottom: 4rem;
-        }
-        
-        .featured-card {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.05) 100%);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 2.5rem;
+        /* ===== FEATURED POST (OVERLAPPING) ===== */
+        .featured-post {
+            max-width: 1400px;
+            margin: 0 auto 6rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 0;
             align-items: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
         
-        .featured-card::before {
+        .featured-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .featured-image::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .featured-card:hover {
-            border-color: rgba(99, 102, 241, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
-        }
-        
-        .featured-card:hover::before {
-            opacity: 1;
-        }
-        
-        .featured-content {
-            position: relative;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(233, 30, 140, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
             z-index: 1;
         }
         
-        .featured-label {
-            display: inline-flex;
+        .featured-image-bg {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0a1a 0%, #0f0a1a 50%, #0a0a15 100%);
+            display: flex;
             align-items: center;
-            gap: 0.4rem;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            color: white;
-            padding: 0.4rem 0.9rem;
-            border-radius: 50px;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .featured-image-decoration {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(233, 30, 140, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 40%);
+            animation: rotate-slow 30s linear infinite;
+        }
+        
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .featured-image-icon {
+            font-size: 5rem;
+            z-index: 2;
+            filter: drop-shadow(0 0 30px rgba(233, 30, 140, 0.5));
+        }
+        
+        .featured-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-left: -4rem;
+            position: relative;
+            z-index: 3;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .featured-tag {
+            display: inline-block;
+            background: rgba(233, 30, 140, 0.15);
+            color: var(--accent-pink);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1.25rem;
-        }
-        
-        .featured-card h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            color: white;
-        }
-        
-        .featured-card p {
-            color: var(--text-secondary);
+            letter-spacing: 0.1em;
             margin-bottom: 1.5rem;
-            line-height: 1.7;
+        }
+        
+        .featured-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .featured-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .featured-title a:hover {
+            color: var(--accent-pink);
+        }
+        
+        .featured-excerpt {
+            color: var(--text-secondary);
             font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
         }
         
         .featured-meta {
@@ -474,298 +492,271 @@
             font-size: 0.9rem;
         }
         
-        .featured-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+        .featured-meta .dot {
+            width: 4px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 50%;
         }
         
-        .featured-image {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.15));
-            border-radius: 16px;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        /* Articles Grid */
-        .articles-section {
-            margin-bottom: 4rem;
-        }
-        
+        /* ===== ARTICLE GRID ===== */
         .articles-grid {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
         
         .article-card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
         
         .article-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-secondary), var(--accent-tertiary));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(233, 30, 140, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
         
         .article-card:hover {
-            background: var(--card-hover);
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow), var(--shadow-card);
+            border-color: rgba(233, 30, 140, 0.3);
         }
         
         .article-card:hover::before {
-            transform: scaleX(1);
+            opacity: 1;
         }
         
-        .article-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        
-        .article-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
+        .article-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #151519 0%, #1a1a20 100%);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
         }
         
-        .article-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
+        .article-image-decoration {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            opacity: 0.5;
         }
         
-        .article-card h3 {
-            font-size: 1.15rem;
+        .article-image-icon {
+            font-size: 3rem;
+            z-index: 2;
+            filter: drop-shadow(0 0 20px rgba(233, 30, 140, 0.4));
+        }
+        
+        .article-content {
+            padding: 1.75rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .article-category {
+            display: inline-block;
+            color: var(--accent-pink);
+            font-size: 0.75rem;
             font-weight: 600;
-            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: 0.75rem;
-            line-height: 1.4;
         }
         
-        .article-card p {
+        .article-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .article-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .article-title a:hover {
+            color: var(--accent-pink);
+        }
+        
+        .article-excerpt {
             color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
-        .article-footer {
+        .article-meta {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-        
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .tag {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--accent);
-            padding: 0.3rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .tag:hover {
-            background: rgba(99, 102, 241, 0.2);
-        }
-        
-        .read-time {
-            font-size: 0.8rem;
+            gap: 1rem;
             color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+            font-size: 0.85rem;
         }
         
-        /* Newsletter Section */
+        .article-card:nth-child(2) {
+            margin-top: 3rem;
+        }
+        
+        .article-card:nth-child(3) {
+            margin-top: 1.5rem;
+        }
+        
+        /* ===== NEWSLETTER SECTION ===== */
         .newsletter-section {
-            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(99, 102, 241, 0.08) 100%);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 3rem;
+            padding: 8rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .newsletter-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 32px;
+            padding: 4rem;
             text-align: center;
-            margin-bottom: 4rem;
             position: relative;
             overflow: hidden;
         }
         
-        .newsletter-section::before {
+        .newsletter-container::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1), transparent 70%);
-            animation: rotate 20s linear infinite;
+            background: radial-gradient(circle, rgba(233, 30, 140, 0.1) 0%, transparent 50%);
+            animation: pulse-slow 10s ease-in-out infinite;
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
         
         .newsletter-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         
-        .newsletter-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
-        }
-        
-        .newsletter-section h2 {
-            font-size: 1.75rem;
+        .newsletter-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
         
-        .newsletter-section p {
+        .newsletter-title .highlight {
+            color: var(--accent-magenta);
+        }
+        
+        .newsletter-description {
             color: var(--text-secondary);
+            font-size: 1.1rem;
             max-width: 500px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2.5rem;
         }
         
         .newsletter-form {
             display: flex;
-            gap: 0.75rem;
-            max-width: 450px;
+            gap: 1rem;
+            max-width: 500px;
             margin: 0 auto;
         }
         
-        .newsletter-form input {
+        .newsletter-input {
             flex: 1;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 0.9rem 1.25rem;
-            color: var(--text);
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
             font-size: 1rem;
-            font-family: inherit;
             outline: none;
             transition: all 0.3s;
         }
         
-        .newsletter-form input::placeholder {
+        .newsletter-input:focus {
+            border-color: var(--accent-magenta);
+            box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.1);
+        }
+        
+        .newsletter-input::placeholder {
             color: var(--text-muted);
         }
         
-        .newsletter-form input:focus {
-            border-color: var(--accent);
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .newsletter-form button {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+        .newsletter-button {
+            background: var(--gradient-hero);
             color: white;
             border: none;
-            padding: 0.9rem 1.5rem;
             border-radius: 12px;
-            font-weight: 600;
+            padding: 1rem 2rem;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(233, 30, 140, 0.3);
         }
         
-        .newsletter-form button:hover {
+        .newsletter-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 30px rgba(233, 30, 140, 0.4);
         }
         
-        /* Footer */
+        /* ===== FOOTER ===== */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
+            padding: 4rem 3rem;
+            border-top: 1px solid var(--card-border);
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         
-        .footer-content {
-            max-width: 1200px;
+        .footer-container {
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
         }
         
         .footer-left {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .footer-logo {
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 0.5rem;
+        }
+        
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: white;
-            text-decoration: none;
+            color: var(--text-primary);
         }
         
-        .footer-logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-        }
-        
-        .footer-text {
+        .footer-copyright {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
@@ -779,44 +770,38 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
-            transition: color 0.2s;
+            transition: color 0.3s;
         }
         
         .footer-links a:hover {
-            color: var(--text);
+            color: var(--accent-pink);
         }
         
-        .social-links {
-            display: flex;
-            gap: 0.75rem;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .featured-post {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .featured-content {
+                margin-left: 0;
+                margin-top: -3rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .article-card:nth-child(2),
+            .article-card:nth-child(3) {
+                margin-top: 0;
+            }
         }
         
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-        }
-        
-        .social-links a:hover {
-            background: rgba(99, 102, 241, 0.2);
-            border-color: rgba(99, 102, 241, 0.3);
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             nav {
-                padding: 0.75rem 1rem;
+                padding: 1rem 1.5rem;
             }
             
             .nav-links {
@@ -827,270 +812,280 @@
                 padding: 7rem 1.5rem 3rem;
             }
             
-            main {
-                padding: 0 1rem 3rem;
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
             }
             
-            .featured-card {
-                grid-template-columns: 1fr;
-                padding: 1.75rem;
+            .editorial-section {
+                padding: 4rem 1.5rem;
             }
             
-            .featured-image {
-                height: 200px;
-                order: -1;
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
             
             .articles-grid {
                 grid-template-columns: 1fr;
             }
             
+            .newsletter-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .newsletter-container {
+                padding: 2.5rem 1.5rem;
+            }
+            
             .newsletter-form {
                 flex-direction: column;
             }
             
-            .footer-content {
+            .footer-container {
                 flex-direction: column;
+                gap: 2rem;
                 text-align: center;
             }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-            }
-        }
-        
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="bg-grid"></div>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="ambient-blob blob-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
+    <div class="grid-pattern"></div>
     
+    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="/" class="nav-logo">
-                <div class="nav-logo-icon">⚡</div>
-                <span>Chuck</span>
+            <a href="#" class="logo">
+                <div class="logo-mark">✦</div>
+                Chuck's Blog
             </a>
             <div class="nav-links">
                 <a href="#articles">Articles</a>
                 <a href="#newsletter">Newsletter</a>
-                <a href="#about">About</a>
+                <a href="https://github.com/shadowtechgaming22-blip" target="_blank">GitHub</a>
                 <a href="#newsletter" class="nav-cta">Subscribe</a>
             </div>
         </div>
     </nav>
     
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-badge">✨ Now with dark mode</div>
-        <h1>
-            Thoughts on <span class="gradient-text">tech</span>,<br>
-            building & creating
-        </h1>
-        <p class="hero-subtitle">
-            Exploring the intersection of technology, creativity, and entrepreneurship. 
-            Sharing lessons learned and tools discovered along the way.
-        </p>
-        <div class="hero-cta">
-            <a href="#articles" class="btn-primary">
-                Read Articles
-                <span>→</span>
-            </a>
-            <a href="#newsletter" class="btn-secondary">
-                <span>📬</span>
-                Subscribe
-            </a>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <span>↓</span>
+        <div class="hero-container">
+            <div class="hero-badge">Now Publishing Weekly</div>
+            <h1>Exploring the <span class="highlight">digital frontier</span> through code, creativity & curiosity</h1>
+            <p class="hero-description">Deep dives into technology, development workflows, and the art of building things that matter. Join me on this journey of continuous learning.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">12<span class="accent">+</span></div>
+                    <div class="stat-label">Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2<span class="accent">K+</span></div>
+                    <div class="stat-label">Readers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">50<span class="accent">+</span></div>
+                    <div class="stat-label">Topics</div>
+                </div>
+            </div>
         </div>
     </section>
     
-    <main>
-        <!-- Featured Article -->
-        <section class="featured-section reveal" id="featured">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <div class="section-title-icon">🔥</div>
-                    Featured
-                </h2>
+    <!-- Editorial Section -->
+    <section class="editorial-section" id="articles">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="line">Latest</span>
+                <span class="line accent">Chronicles</span>
+            </h2>
+            <a href="#" class="view-all">View all articles →</a>
+        </div>
+        
+        <!-- Featured Post -->
+        <article class="featured-post">
+            <div class="featured-image">
+                <div class="featured-image-bg">
+                    <div class="featured-image-decoration"></div>
+                    <div class="featured-image-icon">📧</div>
+                </div>
             </div>
-            <article class="featured-card" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
-                <div class="featured-content">
-                    <span class="featured-label">⭐ Must Read</span>
-                    <h2>Best Email Marketing Software for Creators 2025</h2>
-                    <p>Looking for the perfect email marketing platform? After testing dozens of tools, here's my comprehensive breakdown of the best options for creators, bloggers, and entrepreneurs in 2025.</p>
-                    <div class="featured-meta">
-                        <span>📅 Feb 18, 2025</span>
-                        <span>⏱️ 8 min read</span>
-                        <span>👁️ 1.2k views</span>
+            <div class="featured-content">
+                <span class="featured-tag">Featured</span>
+                <h3 class="featured-title">
+                    <a href="articles/best-email-marketing-2025.html">Best Email Marketing Software for Creators in 2025</a>
+                </h3>
+                <p class="featured-excerpt">A comprehensive comparison of the top email marketing platforms for content creators, solopreneurs, and small businesses. From automation to analytics, find the perfect tool for your audience.</p>
+                <div class="featured-meta">
+                    <span>Jan 15, 2025</span>
+                    <span class="dot"></span>
+                    <span>12 min read</span>
+                    <span class="dot"></span>
+                    <span>Marketing</span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- Articles Grid -->
+        <div class="articles-grid">
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">🤖</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">AI & Automation</span>
+                    <h4 class="article-title">
+                        <a href="#">Building Smarter Workflows with AI Agents</a>
+                    </h4>
+                    <p class="article-excerpt">How to leverage AI agents to automate repetitive tasks and focus on creative work that matters.</p>
+                    <div class="article-meta">
+                        <span>Jan 10, 2025</span>
+                        <span>•</span>
+                        <span>8 min</span>
                     </div>
                 </div>
-                <div class="featured-image">📧</div>
             </article>
-        </section>
-        
-        <!-- All Articles -->
-        <section class="articles-section reveal" id="articles">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <div class="section-title-icon">📝</div>
-                    Latest Articles
-                </h2>
-                <a href="#" class="view-all">View all →</a>
-            </div>
-            <div class="articles-grid">
-                <article class="article-card" onclick="window.location.href='/articles/best-email-marketing-2025.html'">
-                    <div class="article-header">
-                        <div class="article-icon">📧</div>
-                        <span class="article-date">Feb 18</span>
+            
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">⚡</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Development</span>
+                    <h4 class="article-title">
+                        <a href="#">The Art of Building Fast Applications</a>
+                    </h4>
+                    <p class="article-excerpt">Performance optimization techniques that don't compromise on developer experience.</p>
+                    <div class="article-meta">
+                        <span>Jan 5, 2025</span>
+                        <span>•</span>
+                        <span>10 min</span>
                     </div>
-                    <h3>Best Email Marketing Software for Creators 2025</h3>
-                    <p>ConvertKit vs Beehiiv vs ActiveCampaign — which email platform should you choose as a creator? Here's the breakdown.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">email-marketing</span>
-                            <span class="tag">tools</span>
-                        </div>
-                        <span class="read-time">⏱️ 8 min</span>
+                </div>
+            </article>
+            
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">🎨</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Design</span>
+                    <h4 class="article-title">
+                        <a href="#">Dark Mode Design Principles</a>
+                    </h4>
+                    <p class="article-excerpt">Creating beautiful dark interfaces that reduce eye strain while maintaining visual hierarchy.</p>
+                    <div class="article-meta">
+                        <span>Dec 28, 2024</span>
+                        <span>•</span>
+                        <span>6 min</span>
                     </div>
-                </article>
-                
-                <article class="article-card" onclick="window.location.href='#'">
-                    <div class="article-header">
-                        <div class="article-icon">🚀</div>
-                        <span class="article-date">Feb 15</span>
+                </div>
+            </article>
+            
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">🚀</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Productivity</span>
+                    <h4 class="article-title">
+                        <a href="#">The Deep Work Revolution</a>
+                    </h4>
+                    <p class="article-excerpt">Strategies for achieving flow state in a world full of distractions.</p>
+                    <div class="article-meta">
+                        <span>Dec 20, 2024</span>
+                        <span>•</span>
+                        <span>7 min</span>
                     </div>
-                    <h3>Building a SaaS in 30 Days: Lessons Learned</h3>
-                    <p>The complete journey from idea to first paying customers. What worked, what didn't, and what I'd do differently.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">saas</span>
-                            <span class="tag">startup</span>
-                        </div>
-                        <span class="read-time">⏱️ 12 min</span>
+                </div>
+            </article>
+            
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">💡</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Ideas</span>
+                    <h4 class="article-title">
+                        <a href="#">The Future of Digital Creation</a>
+                    </h4>
+                    <p class="article-excerpt">Exploring how AI and no-code tools are democratizing software development.</p>
+                    <div class="article-meta">
+                        <span>Dec 15, 2024</span>
+                        <span>•</span>
+                        <span>9 min</span>
                     </div>
-                </article>
-                
-                <article class="article-card" onclick="window.location.href='#'">
-                    <div class="article-header">
-                        <div class="article-icon">⚡</div>
-                        <span class="article-date">Feb 10</span>
+                </div>
+            </article>
+            
+            <article class="article-card">
+                <div class="article-image">
+                    <div class="article-image-decoration"></div>
+                    <div class="article-image-icon">🔒</div>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Security</span>
+                    <h4 class="article-title">
+                        <a href="#">Privacy-First Architecture</a>
+                    </h4>
+                    <p class="article-excerpt">Building applications that respect user privacy without sacrificing functionality.</p>
+                    <div class="article-meta">
+                        <span>Dec 8, 2024</span>
+                        <span>•</span>
+                        <span>11 min</span>
                     </div>
-                    <h3>The Modern Developer's Toolkit 2025</h3>
-                    <p>My essential tools, extensions, and workflows for productive development in the new year.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">devtools</span>
-                            <span class="tag">productivity</span>
-                        </div>
-                        <span class="read-time">⏱️ 6 min</span>
-                    </div>
-                </article>
-                
-                <article class="article-card" onclick="window.location.href='#'">
-                    <div class="article-header">
-                        <div class="article-icon">🎨</div>
-                        <span class="article-date">Feb 5</span>
-                    </div>
-                    <h3>Design Systems That Scale</h3>
-                    <p>How to build and maintain a design system that grows with your product and team.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">design</span>
-                            <span class="tag">ui/ux</span>
-                        </div>
-                        <span class="read-time">⏱️ 10 min</span>
-                    </div>
-                </article>
-                
-                <article class="article-card" onclick="window.location.href='#'">
-                    <div class="article-header">
-                        <div class="article-icon">🤖</div>
-                        <span class="article-date">Jan 28</span>
-                    </div>
-                    <h3>AI Tools That Actually Save Time</h3>
-                    <p>Cut through the hype. These are the AI-powered tools that have genuinely improved my workflow.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">ai</span>
-                            <span class="tag">automation</span>
-                        </div>
-                        <span class="read-time">⏱️ 7 min</span>
-                    </div>
-                </article>
-                
-                <article class="article-card" onclick="window.location.href='#'">
-                    <div class="article-header">
-                        <div class="article-icon">💰</div>
-                        <span class="article-date">Jan 20</span>
-                    </div>
-                    <h3>Monetizing Your Newsletter</h3>
-                    <p>From sponsorships to premium subscriptions — a practical guide to making money from your audience.</p>
-                    <div class="article-footer">
-                        <div class="tags">
-                            <span class="tag">monetization</span>
-                            <span class="tag">newsletter</span>
-                        </div>
-                        <span class="read-time">⏱️ 9 min</span>
-                    </div>
-                </article>
-            </div>
-        </section>
-        
-        <!-- Newsletter -->
-        <section class="newsletter-section reveal" id="newsletter">
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container">
             <div class="newsletter-content">
-                <div class="newsletter-icon">📬</div>
-                <h2>Join the newsletter</h2>
-                <p>Get the latest articles, tools, and insights delivered straight to your inbox. No spam, unsubscribe anytime.</p>
+                <h2 class="newsletter-title">Join the <span class="highlight">inner circle</span></h2>
+                <p class="newsletter-description">Get weekly insights on tech, creativity, and building in the digital age. No spam, just value.</p>
                 <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit">Subscribe</button>
+                    <input type="email" class="newsletter-input" placeholder="your@email.com" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
                 </form>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
     
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
+        <div class="footer-container">
             <div class="footer-left">
-                <a href="/" class="footer-logo">
-                    <div class="footer-logo-icon">⚡</div>
-                    <span>Chuck</span>
-                </a>
-                <span class="footer-text">© 2025 — Built with curiosity</span>
+                <div class="footer-brand">Chuck's Blog</div>
+                <div class="footer-copyright">© 2025 All rights reserved.</div>
             </div>
             <div class="footer-links">
-                <a href="#articles">Articles</a>
-                <a href="#newsletter">Newsletter</a>
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
                 <a href="#">RSS</a>
-            </div>
-            <div class="social-links">
-                <a href="#" title="Twitter">𝕏</a>
-                <a href="#" title="GitHub">⌘</a>
-                <a href="#" title="LinkedIn">in</a>
             </div>
         </div>
     </footer>
     
     <script>
         // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
@@ -1098,27 +1093,14 @@
             }
         });
         
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            revealElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('active');
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            });
-        };
-        
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-        
-        // Article card click handlers
-        document.querySelectorAll('.article-card, .featured-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             });
         });
     </script>
