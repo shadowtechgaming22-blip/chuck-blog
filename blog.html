@@ -31,67 +31,79 @@
 <body class="bg-dark-900 text-gray-100 font-body">
   <nav class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-xl border-b border-dark-600/50 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="/" class="text-xl font-heading font-bold">CPA<span class="gradient-text">Inbox</span></a>
-      <a href="/" class="text-gray-300 hover:text-white">← Back to Home</a>
+      <a href="./index.html" class="text-xl font-heading font-bold">CPA<span class="gradient-text">Inbox</span></a>
+      <a href="./index.html" class="text-gray-300 hover:text-white">← Back to Home</a>
     </div>
   </nav>
 
   <main class="pt-24 pb-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-heading font-bold mb-2">Latest Articles</h1>
-      <p class="text-gray-400 mb-12">Tutorials and resources to help you master email marketing.</p>
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-2">Latest Articles</h1>
+      <p class="text-gray-400 mb-10">Tutorials and resources to help you master email marketing.</p>
 
-      <div class="space-y-8">
+      <div class="grid md:grid-cols-2 gap-8">
         <!-- Article 1 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Beginner</span>
-            <span class="text-gray-500 text-sm">Feb 20, 2026</span>
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+          <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=1200&q=80" alt="Laptop and email dashboard" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Beginner</span>
+              <span class="text-gray-500 text-sm">Feb 20, 2026</span>
+            </div>
+            <h2 class="text-2xl font-heading font-semibold mb-3">
+              <a href="./article-grow-email-list.html" class="hover:text-accent-primary transition-colors">How to Grow Your Email List from Zero (Even with No Following)</a>
+            </h2>
+            <p class="text-gray-400 mb-4">A step-by-step guide to building your first email list from scratch. No followers or website required.</p>
+            <a href="./article-grow-email-list.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
           </div>
-          <h2 class="text-2xl font-heading font-semibold mb-3">
-            <a href="./article-grow-email-list.html" class="hover:text-accent-primary transition-colors">How to Grow Your Email List from Zero (Even with No Following)</a>
-          </h2>
-          <p class="text-gray-400 mb-4">A step-by-step guide to building your first email list from scratch. No followers or website required.</p>
-          <a href="./article-grow-email-list.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
         </article>
 
         <!-- Article 2 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-accent-primary/10 text-accent-primary text-xs px-2 py-1 rounded">Email Marketing</span>
-            <span class="text-gray-500 text-sm">Feb 20, 2026</span>
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80" alt="Code and analytics screen" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-accent-primary/10 text-accent-primary text-xs px-2 py-1 rounded">Email Marketing</span>
+              <span class="text-gray-500 text-sm">Feb 20, 2026</span>
+            </div>
+            <h2 class="text-2xl font-heading font-semibold mb-3">
+              <a href="./article-best-email-software.html" class="hover:text-accent-primary transition-colors">The Best Email Marketing Software for Creators in 2026</a>
+            </h2>
+            <p class="text-gray-400 mb-4">A comprehensive comparison of the top email marketing platforms for creators, including ConvertKit, ActiveCampaign, and more.</p>
+            <a href="./article-best-email-software.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
           </div>
-          <h2 class="text-2xl font-heading font-semibold mb-3">
-            <a href="./article-best-email-software.html" class="hover:text-accent-primary transition-colors">The Best Email Marketing Software for Creators in 2026</a>
-          </h2>
-          <p class="text-gray-400 mb-4">A comprehensive comparison of the top email marketing platforms for creators, including ConvertKit, ActiveCampaign, and more.</p>
-          <a href="./article-best-email-software.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
-        </article>
-
-        <!-- Article 2 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-accent-secondary/10 text-accent-secondary text-xs px-2 py-1 rounded">Beginner</span>
-            <span class="text-gray-500 text-sm">Feb 18, 2026</span>
-          </div>
-          <h2 class="text-2xl font-heading font-semibold mb-3">
-            <a href="./article-build-first-email-list.html" class="hover:text-accent-primary transition-colors">How to Build Your First Email List from Scratch</a>
-          </h2>
-          <p class="text-gray-400 mb-4">Step-by-step guide to starting your email list, even if you're starting from zero.</p>
-          <a href="./article-build-first-email-list.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
         </article>
 
         <!-- Article 3 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Strategy</span>
-            <span class="text-gray-500 text-sm">Feb 15, 2026</span>
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80" alt="Business growth charts on laptop" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-accent-secondary/10 text-accent-secondary text-xs px-2 py-1 rounded">Beginner</span>
+              <span class="text-gray-500 text-sm">Feb 18, 2026</span>
+            </div>
+            <h2 class="text-2xl font-heading font-semibold mb-3">
+              <a href="./article-build-first-email-list.html" class="hover:text-accent-primary transition-colors">How to Build Your First Email List from Scratch</a>
+            </h2>
+            <p class="text-gray-400 mb-4">Step-by-step guide to starting your email list, even if you're starting from zero.</p>
+            <a href="./article-build-first-email-list.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
           </div>
-          <h2 class="text-2xl font-heading font-semibold mb-3">
-            <a href="./article-email-sequences.html" class="hover:text-accent-primary transition-colors">Email Sequences That Convert: A Practical Guide</a>
-          </h2>
-          <p class="text-gray-400 mb-4">Learn how to write email sequences that nurture leads and drive conversions.</p>
-          <a href="./article-email-sequences.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80" alt="Team planning marketing strategy" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Strategy</span>
+              <span class="text-gray-500 text-sm">Feb 15, 2026</span>
+            </div>
+            <h2 class="text-2xl font-heading font-semibold mb-3">
+              <a href="./article-email-sequences.html" class="hover:text-accent-primary transition-colors">Email Sequences That Convert: A Practical Guide</a>
+            </h2>
+            <p class="text-gray-400 mb-4">Learn how to write email sequences that nurture leads and drive conversions.</p>
+            <a href="./article-email-sequences.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+          </div>
         </article>
       </div>
     </div>
