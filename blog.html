@@ -287,6 +287,7 @@
           <span>Loading more articles...</span>
         </div>
       </div>
+      <p id="all-loaded" class="text-center py-8 text-gray-500 hidden">You have reached the end!</p>
     </div>
   </main>
 
@@ -301,6 +302,7 @@
       
       const cards = document.querySelectorAll('.article-card');
       const loading = document.getElementById('loading');
+      const allLoaded = document.getElementById('all-loaded');
       let visibleCount = INITIAL_COUNT;
       let isAnimating = false;
 
@@ -312,11 +314,22 @@
             card.style.display = 'none';
           }
         });
+        // Hide loading initially, show "all loaded" if we have all cards
+        if (cards.length <= INITIAL_COUNT) {
+          loading.classList.add('hidden');
+          allLoaded.classList.remove('hidden');
+        }
       }
 
       // Show more cards with animation
       function showMoreCards() {
-        if (visibleCount >= cards.length || isAnimating) return;
+        if (visibleCount >= cards.length || isAnimating) {
+          if (visibleCount >= cards.length) {
+            loading.classList.add('hidden');
+            allLoaded.classList.remove('hidden');
+          }
+          return;
+        }
         
         isAnimating = true;
         loading.classList.add('visible');
@@ -386,6 +399,8 @@
         const resultsCount = document.getElementById('search-results-count');
         const cards = document.querySelectorAll('.article-card');
         const articlesGrid = document.getElementById('articles-grid');
+        const loading = document.getElementById('loading');
+        const allLoaded = document.getElementById('all-loaded');
 
         // Store original order
         const originalCards = Array.from(cards);
@@ -396,6 +411,8 @@
           if (!query) {
             // Reset to original state
             resultsCount.classList.add('hidden');
+            loading.classList.add('hidden');
+            allLoaded.classList.add('hidden');
             cards.forEach(card => {
               card.style.display = '';
               card.classList.remove('hidden');
@@ -419,6 +436,9 @@
             }
           });
 
+          loading.classList.add('hidden');
+          allLoaded.classList.add('hidden');
+          
           if (matchCount === 0) {
             resultsCount.textContent = 'No articles found for "' + query + '"';
             resultsCount.classList.remove('hidden');
