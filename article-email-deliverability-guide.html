@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Deliverability Guide — CPAInbox</title>
+  <meta name="description" content="Master email deliverability. Learn how to land in the inbox, avoid spam folders, and build a sender reputation that lasts.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { heading: ['Space Grotesk', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          colors: { dark: { 900: '#0a0a0f', 800: '#12121a', 700: '#1a1a25', 600: '#252532', 500: '#32324a' }, accent: { primary: '#6366f1', secondary: '#22d3ee', success: '#10b981', warning: '#f59e0b' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gradient-text { background: linear-gradient(135deg, #6366f1, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-glow:hover { box-shadow: 0 0 40px rgba(99, 102, 241, 0.15); }
+  </style>
+</head>
+<body class="bg-dark-900 text-gray-100 font-body">
+  <nav class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-xl border-b border-dark-600/50 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="./index.html" class="text-xl font-heading font-bold">CPA<span class="gradient-text">Inbox</span></a>
+      <a href="./blog.html" class="text-gray-300 hover:text-white">← Back to Blog</a>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-4">
+    <article class="max-w-3xl mx-auto">
+      <header class="mb-10">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-accent-warning/10 text-accent-warning text-xs px-2 py-1 rounded">Technical</span>
+          <span class="text-gray-500 text-sm">Feb 25, 2026</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-4">Email Deliverability Guide: Inbox vs. Spam</h1>
+        <p class="text-xl text-gray-400">It doesn't matter how good your email is if it never gets delivered. Here's everything you need to know about landing in the inbox.</p>
+      </header>
+
+      <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=1200&q=80" alt="Mail sorting facility" class="w-full h-72 object-cover rounded-2xl mb-10">
+
+      <div class="prose prose-invert prose-lg max-w-none">
+        <p class="text-gray-300 mb-6">You could write the perfect email — compelling subject line, valuable content, clear CTA — and if it lands in spam, nobody reads it. In fact, <strong>21% of legitimate emails</strong> land in spam folders (Postmark). That's not a risk you can afford.</p>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">What Is Email Deliverability?</h2>
+        <p class="text-gray-300 mb-4">Deliverability isn't about getting emails delivered — it's about getting them delivered to the <strong>inbox</strong>, not spam. Email inboxing depends on dozens of factors, mostly controlled by inbox providers (Gmail, Outlook, Apple Mail) evaluating your sender reputation.</p>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">The 3 Pillars of Deliverability</h2>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">1. Sender Reputation</h3>
+        <p class="text-gray-300 mb-4">Your sender reputation is a score (0-100) that inbox providers assign based on:</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li>Email volume and consistency</li>
+          <li>Open rates and click rates</li>
+          <li>Spam complaints (hard bounces)</li>
+          <li>Unsubscribe rates</li>
+          <li>Engagement patterns over time</li>
+        </ul>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">2. Email Content</h3>
+        <p class="text-gray-300 mb-4">What you send affects where it lands:</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li>Subject line quality and authenticity</li>
+          <li>Link-to-text ratio (avoid too many links)</li>
+          <li>Image-to-text balance (don't rely on images)</li>
+          <li>Spam trigger words and phrases</li>
+          <li>HTML email quality</li>
+        </ul>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">3. Authentication</h3>
+        <p class="text-gray-300 mb-4">Technical protocols that prove you're legitimate:</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li><strong>SPF:</strong> Specifies which servers can send email for your domain</li>
+          <li><strong>DKIM:</strong> Cryptographic signature proving email wasn't tampered</li>
+          <li><strong>DMARC:</strong> Policy telling receivers what to do with failures</li>
+        </ul>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">12 Actionable Deliverability Tips</h2>
+
+        <div class="space-y-6 mb-8">
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">1. Warm Up New Sending Domains</h4>
+            <p class="text-gray-400 text-sm">Don't blast 10,000 emails on day one. Start with 50/day, then 100, then ramp up over 4-6 weeks.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">2. Send Consistently</h4>
+            <p class="text-gray-400 text-sm">Pick a schedule and stick to it. Inbox providers reward predictable senders.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">3. Clean Your List Quarterly</h4>
+            <p class="text-gray-400 text-sm">Remove subscribers who haven't opened in 90-120 days. Low engagement drags down your reputation.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">4. Make Unsubscribing Easy</h4>
+            <p class="text-gray-400 text-sm">One-click unsubscribe in every email. Hidden unsubscribe buttons trigger spam complaints.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">5. Avoid Spam Triggers</h4>
+            <p class="text-gray-400 text-sm">Skip ALL CAPS, excessive exclamation marks (!!!), and words like "FREE", "ACT NOW", "GUARANTEE" in subject lines.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">6. Use a Dedicated Sending Domain</h4>
+            <p class="text-gray-400 text-sm">If possible, use a subdomain like <em>emails.yourdomain.com</em> for sending. Keeps your main domain reputation safe.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">7. Set Up Authentication Yesterday</h4>
+            <p class="text-gray-400 text-sm">Configure SPF, DKIM, and DMARC through your email provider. This is non-negotiable in 2026.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">8. Preview Text Matters</h4>
+            <p class="text-gray-400 text-sm">Optimize the preview text (the snippet after your subject line). It influences open rates.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">9. Encourage Replies</h4>
+            <p class="text-gray-400 text-sm">Reply emails signal engagement. End emails with genuine questions. Set up a "reply-to" address you actually check.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">10. Monitor Your Metrics</h4>
+            <p class="text-gray-400 text-sm">Track: Open rate (>20% is good), Click rate (>2% is good), Complaint rate (<0.1% is ideal), Bounce rate (<2% is ideal).</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">11. Use a Professional ESP</h4>
+            <p class="text-gray-400 text-sm">Services like Kit, ActiveCampaign, and ConvertKit have built-in deliverability infrastructure. Don't use Gmail or Outlook for bulk sending.</p>
+          </div>
+
+          <div class="bg-dark-800 border border-dark-600 rounded-xl p-5">
+            <h4 class="font-semibold text-white mb-2">12. Test Before You Send</h4>
+            <p class="text-gray-400 text-sm">Use tools like Mail Tester or GlockApps to check spam scores before major sends.</p>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">What to Do If You're in Spam</h2>
+        <ol class="list-decimal pl-6 text-gray-300 space-y-3 mb-6">
+          <li><strong>Check your sender score:</strong> Use tools like Sender Score or Google Postmaster Tools.</li>
+          <li><strong>Review recent complaint rates:</strong> Identify what triggered subscribers.</li>
+          <li><strong>Clean your list aggressively:</strong> Remove anyone who hasn't engaged in 60 days.</li>
+          <li><strong>Change subject lines:</strong> If you've been using clickbait, stop immediately.</li>
+          <li><strong>Ask subscribers to whitelist you:</strong> Include instructions in your next email.</li>
+        </ol>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">The Bottom Line</h2>
+        <p class="text-gray-300 mb-4">Email deliverability isn't a "set and forget" task. It requires ongoing attention, regular list cleaning, and authentic sending practices. The good news: if you're sending valuable content to engaged subscribers, inbox providers will reward you.</p>
+        <p class="text-gray-300">Start with authentication setup this week. It's the foundation everything else builds on.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8 text-center text-gray-500 text-sm">
+    <p>© 2026 CPAInbox. All rights reserved.</p>
+  </footer>
+</body>
+</html>

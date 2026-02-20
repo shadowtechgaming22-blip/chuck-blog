@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Email Best Practices — CPAInbox</title>
+  <meta name="description" content="Learn how to write welcome emails that convert subscribers into loyal readers and buyers.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { heading: ['Space Grotesk', 'sans-serif'], body: ['Inter', 'sans-serif'] },
+          colors: { dark: { 900: '#0a0a0f', 800: '#12121a', 700: '#1a1a25', 600: '#252532', 500: '#32324a' }, accent: { primary: '#6366f1', secondary: '#22d3ee', success: '#10b981', warning: '#f59e0b' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gradient-text { background: linear-gradient(135deg, #6366f1, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-glow:hover { box-shadow: 0 0 40px rgba(99, 102, 241, 0.15); }
+  </style>
+</head>
+<body class="bg-dark-900 text-gray-100 font-body">
+  <nav class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-xl border-b border-dark-600/50 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="./index.html" class="text-xl font-heading font-bold">CPA<span class="gradient-text">Inbox</span></a>
+      <a href="./blog.html" class="text-gray-300 hover:text-white">← Back to Blog</a>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-4">
+    <article class="max-w-3xl mx-auto">
+      <header class="mb-10">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Strategy</span>
+          <span class="text-gray-500 text-sm">Feb 23, 2026</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-4">Welcome Email Best Practices That Convert</h1>
+        <p class="text-xl text-gray-400">Your welcome sequence is the most important automated emails you'll ever write. Here's how to get it right.</p>
+      </header>
+
+      <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200&q=80" alt="Happy team celebrating" class="w-full h-72 object-cover rounded-2xl mb-10">
+
+      <div class="prose prose-invert prose-lg max-w-none">
+        <p class="text-gray-300 mb-6">Your welcome email lands in your subscriber's inbox within minutes of them signing up. This is when they're most engaged, most curious, and most likely to take action. Get it right, and you've started building a relationship. Get it wrong, and you've lost them forever.</p>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">Why Welcome Emails Matter</h2>
+        <p class="text-gray-300 mb-6">Welcome emails have <strong>4x higher open rates</strong> and generate <strong>320% more revenue</strong> than regular promotional emails (DMA Insights). But beyond the stats, your welcome sequence sets the tone for your entire relationship.</p>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">The Perfect Welcome Sequence Structure</h2>
+        <p class="text-gray-300 mb-4">A high-converting welcome sequence typically spans 3-5 emails over 7-14 days. Here's what each email should accomplish:</p>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">Email 1: Immediate Delivery (Day 0)</h3>
+        <p class="text-gray-300 mb-4">Send this within 60 seconds of signup. Deliver what they signed up for — your lead magnet, free guide, or resource. Don't make them wait.</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li>Subject line: "Here’s your [lead magnet name] 👇"</li>
+          <li>Personalize with their first name if possible</li>
+          <li>Keep it short: welcome, deliver the value, soft CTA</li>
+        </ul>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">Email 2: The Quick Win (Day 1-2)</h3>
+        <p class="text-gray-300 mb-4">Help them achieve one small win quickly. This builds trust and proves you deliver on your promises.</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li>Share one actionable tip they can implement today</li>
+          <li>Keep it under 200 words</li>
+          <li>End with a question to encourage reply</li>
+        </ul>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">Email 3: Your Story (Day 3-5)</h3>
+        <p class="text-gray-300 mb-4">Humans connect with humans. Share why you started this newsletter and what drives you.</p>
+        <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+          <li>Keep it authentic, not corporate</li>
+          <li>Connect your story to their problem</li>
+          <li>Invite them to reply with their own story</li>
+        </ul>
+
+        <h3 class="text-xl font-heading font-semibold mt-8 mb-3">Email 4: The Bridge to Paid (Day 7-14)</h3>
+        <p class="text-gray-300 mb-4">This is where you naturally introduce your offer, if you have one. Don't hard-sell — just share why this exists and who it's for.</p>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">5 Welcome Email Mistakes to Avoid</h2>
+        <ol class="list-decimal pl-6 text-gray-300 space-y-3 mb-6">
+          <li><strong>Delaying the lead magnet:</strong> Send immediately or within minutes, not hours.</li>
+          <li><strong>Being too salesy:</strong> Your first 3 emails should be 90% value, 10% pitch.</li>
+          <li><strong>No clear CTA:</strong> Every email should have ONE action you want them to take.</li>
+          <li><strong>Forgetting mobile optimization:</strong> 60%+ of opens happen on mobile.</li>
+          <li><strong>Not testing:</strong> A/B test subject lines and send times.</li>
+        </ol>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">Quick Wins Checklist</h2>
+        <div class="bg-dark-800 border border-dark-600 rounded-xl p-6 mb-8">
+          <ul class="space-y-2 text-gray-300">
+            <li>☐ Write your welcome email in under 30 minutes today</li>
+            <li>☐ Set up automation to send within 60 seconds of signup</li>
+            <li>☐ Include one clear CTA per email</li>
+            <li>☐ Test your welcome sequence on yourself first</li>
+            <li>☐ Track open rates and adjust subject lines</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-heading font-bold mt-10 mb-4">Next Steps</h2>
+        <p class="text-gray-300 mb-4">Your welcome sequence is a living system. Review it monthly, test new approaches, and always be collecting data. The best creators treat every email as a learning opportunity.</p>
+        <p class="text-gray-300">Need help setting this up? Check out our <a href="./email-templates.html" class="text-accent-primary hover:underline">email templates</a> for copy-paste versions of these sequences.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8 text-center text-gray-500 text-sm">
+    <p>© 2026 CPAInbox. All rights reserved.</p>
+  </footer>
+</body>
+</html>
