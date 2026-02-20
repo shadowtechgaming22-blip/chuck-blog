@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - CPAInbox</title>
+  <meta name="description" content="Latest tutorials and resources on email marketing for creators.">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'heading': ['Space Grotesk', 'sans-serif'],
+            'body': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'dark': { 900: '#0a0a0f', 800: '#12121a', 700: '#1a1a25', 600: '#252532', 500: '#32324a' },
+            'accent': { primary: '#6366f1', secondary: '#22d3ee', success: '#10b981', warning: '#f59e0b' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .gradient-text { background: linear-gradient(135deg, #6366f1, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .card-glow:hover { box-shadow: 0 0 40px rgba(99, 102, 241, 0.15); }
+  </style>
+</head>
+<body class="bg-dark-900 text-gray-100 font-body">
+  <nav class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-xl border-b border-dark-600/50 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-xl font-heading font-bold">CPA<span class="gradient-text">Inbox</span></a>
+      <a href="/" class="text-gray-300 hover:text-white">← Back to Home</a>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-heading font-bold mb-2">Latest Articles</h1>
+      <p class="text-gray-400 mb-12">Tutorials and resources to help you master email marketing.</p>
+
+      <div class="space-y-8">
+        <!-- Article 1 -->
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-accent-primary/10 text-accent-primary text-xs px-2 py-1 rounded">Email Marketing</span>
+            <span class="text-gray-500 text-sm">Feb 20, 2026</span>
+          </div>
+          <h2 class="text-2xl font-heading font-semibold mb-3">
+            <a href="#" class="hover:text-accent-primary transition-colors">The Best Email Marketing Software for Creators in 2026</a>
+          </h2>
+          <p class="text-gray-400 mb-4">A comprehensive comparison of the top email marketing platforms for creators, including ConvertKit, ActiveCampaign, and more.</p>
+          <a href="#" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-accent-secondary/10 text-accent-secondary text-xs px-2 py-1 rounded">Beginner</span>
+            <span class="text-gray-500 text-sm">Feb 18, 2026</span>
+          </div>
+          <h2 class="text-2xl font-heading font-semibold mb-3">
+            <a href="#" class="hover:text-accent-primary transition-colors">How to Build Your First Email List from Scratch</a>
+          </h2>
+          <p class="text-gray-400 mb-4">Step-by-step guide to starting your email list, even if you're starting from zero.</p>
+          <a href="#" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="bg-dark-800 border border-dark-600 rounded-2xl p-6 card-glow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-accent-success/10 text-accent-success text-xs px-2 py-1 rounded">Strategy</span>
+            <span class="text-gray-500 text-sm">Feb 15, 2026</span>
+          </div>
+          <h2 class="text-2xl font-heading font-semibold mb-3">
+            <a href="#" class="hover:text-accent-primary transition-colors">Email Sequences That Convert: A Practical Guide</a>
+          </h2>
+          <p class="text-gray-400 mb-4">Learn how to write email sequences that nurture leads and drive conversions.</p>
+          <a href="#" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-dark-800 border-t border-dark-600 py-8 text-center text-gray-500 text-sm">
+    <p>© 2026 CPAInbox. All rights reserved.</p>
+  </footer>
+</body>
+</html>
