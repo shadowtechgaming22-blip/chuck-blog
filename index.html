@@ -68,6 +68,18 @@
       animation: pulse-glow 3s ease-in-out infinite;
     }
     .scroll-smooth { scroll-behavior: smooth; }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   </style>
  </head>
  <body class="h-full bg-dark-900 text-gray-100 font-body overflow-auto">
@@ -134,30 +146,33 @@
       </div>
      </div>
    </section><!-- Latest Articles -->
-   <section class="py-12 px-4">
+   <section class="pt-16 pb-10 px-4">
     <div class="max-w-7xl mx-auto">
-     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-      <div>
-       <h2 class="text-3xl sm:text-4xl font-heading font-bold mb-2">Latest <span class="gradient-text">Articles</span></h2>
-       <p class="text-gray-400">Stay up to date with practical tutorials on email growth and monetization.</p>
+     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 lg:mb-10">
+      <div class="max-w-2xl">
+       <h2 class="text-4xl sm:text-5xl font-heading font-bold tracking-tight mb-2">Latest <span class="gradient-text">Articles</span></h2>
+       <p class="text-gray-400 text-base sm:text-lg">Stay up to date with practical tutorials on email growth and monetization.</p>
       </div>
-      <a href="./blog.html" class="inline-flex items-center gap-2 text-accent-primary hover:text-accent-secondary font-semibold transition-colors">View all articles <span aria-hidden="true">→</span></a>
+      <a href="./blog.html" class="inline-flex items-center gap-2 text-accent-primary hover:text-accent-secondary font-semibold text-sm sm:text-base transition-colors">View all articles <span aria-hidden="true">↗</span></a>
      </div>
 
-     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <a href="./article-grow-email-list.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-primary/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+      <a href="./article-grow-email-list.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-primary/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=900&q=80" alt="Grow email list" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3 flex gap-2">
          <span class="text-xs bg-accent-primary/20 text-accent-primary px-2.5 py-1 rounded-full border border-accent-primary/30">Email Growth</span>
          <span class="text-xs bg-accent-warning/20 text-accent-warning px-2.5 py-1 rounded-full border border-accent-warning/30">Featured</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 20, 2026 · ⏱ 9 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-primary transition-colors">How to Grow Your Email List from Zero</h3>
-        <p class="text-gray-400 text-sm mb-4">Step-by-step guide to building your first email list from scratch, even with no audience.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 20, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 9 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-primary transition-colors">How to Grow Your Email List from Zero</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">Step-by-step guide to building your first email list from scratch, even with no audience.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Beginner</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Email List</span>
@@ -167,18 +182,21 @@
        </div>
       </a>
 
-      <a href="./article-build-first-email-list.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-secondary/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+      <a href="./article-build-first-email-list.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-secondary/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Build first email list" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3">
          <span class="text-xs bg-accent-secondary/20 text-accent-secondary px-2.5 py-1 rounded-full border border-accent-secondary/30">Acquisition</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 20, 2026 · ⏱ 8 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-secondary transition-colors">Build Your First Email List (Without Ads)</h3>
-        <p class="text-gray-400 text-sm mb-4">Simple channels to get your first 100 subscribers without spending on paid traffic.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 20, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 8 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-secondary transition-colors">Build Your First Email List (Without Ads)</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">Simple channels to get your first 100 subscribers without spending on paid traffic.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Traffic</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">No Ads</span>
@@ -188,19 +206,22 @@
        </div>
       </a>
 
-      <a href="./article-best-email-software.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-success/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+      <a href="./article-best-email-software.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-success/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&q=80" alt="Best email software" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3 flex gap-2">
          <span class="text-xs bg-accent-success/20 text-accent-success px-2.5 py-1 rounded-full border border-accent-success/30">Tools</span>
          <span class="text-xs bg-accent-warning/20 text-accent-warning px-2.5 py-1 rounded-full border border-accent-warning/30">Popular</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 20, 2026 · ⏱ 11 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-success transition-colors">Best Email Marketing Software for Creators</h3>
-        <p class="text-gray-400 text-sm mb-4">Compare ConvertKit, ActiveCampaign, and Beehiiv to choose the right stack.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 20, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 11 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-success transition-colors">Best Email Marketing Software for Creators</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">Compare ConvertKit, ActiveCampaign, and Beehiiv to choose the right stack.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">ConvertKit</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Tools</span>
@@ -210,18 +231,21 @@
        </div>
       </a>
 
-      <a href="./article-email-sequences.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-primary/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+      <a href="./article-email-sequences.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-primary/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80" alt="Email sequences" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3">
          <span class="text-xs bg-accent-primary/20 text-accent-primary px-2.5 py-1 rounded-full border border-accent-primary/30">Automation</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 20, 2026 · ⏱ 10 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-primary transition-colors">Email Sequences That Turn Subscribers Into Buyers</h3>
-        <p class="text-gray-400 text-sm mb-4">Use plug-and-play welcome, nurture, and sales flows to improve conversions.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 20, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 10 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-primary transition-colors">Email Sequences That Turn Subscribers Into Buyers</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">Use plug-and-play welcome, nurture, and sales flows to improve conversions.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Templates</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Automation</span>
@@ -231,18 +255,21 @@
        </div>
       </a>
 
-      <a href="./blog.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-secondary/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+      <a href="./blog.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-secondary/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=80" alt="Creator strategy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3">
          <span class="text-xs bg-accent-secondary/20 text-accent-secondary px-2.5 py-1 rounded-full border border-accent-secondary/30">Career</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 21, 2026 · ⏱ 7 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-secondary transition-colors">Creator Growth Roadmap for 2026</h3>
-        <p class="text-gray-400 text-sm mb-4">A practical plan to grow content, list, and recurring affiliate revenue month by month.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 21, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 7 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-secondary transition-colors">Creator Growth Roadmap for 2026</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">A practical plan to grow content, list, and recurring affiliate revenue month by month.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Roadmap</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Growth</span>
@@ -252,18 +279,21 @@
        </div>
       </a>
 
-      <a href="./blog.html" class="group bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden hover:border-accent-success/50 transition-all card-glow">
-       <div class="relative h-44 overflow-hidden">
+      <a href="./blog.html" class="group h-full bg-dark-800/95 border border-dark-600 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-success/50 card-glow">
+       <div class="relative h-52 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=900&q=80" alt="Tools and resources" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-3 left-3">
          <span class="text-xs bg-accent-success/20 text-accent-success px-2.5 py-1 rounded-full border border-accent-success/30">Tools &amp; Resources</span>
         </div>
        </div>
-       <div class="p-5">
-        <p class="text-xs text-gray-500 mb-3">📅 Feb 22, 2026 · ⏱ 6 min read</p>
-        <h3 class="text-2xl font-heading font-bold text-white mb-3 group-hover:text-accent-success transition-colors">Essential Creator Tools You Actually Need</h3>
-        <p class="text-gray-400 text-sm mb-4">A curated stack for content, email capture, automation, and affiliate reporting.</p>
-        <div class="flex items-center justify-between">
+       <div class="p-5 flex flex-col min-h-[17rem]">
+        <p class="text-xs text-gray-500 mb-4 flex items-center gap-4">
+         <span class="inline-flex items-center gap-1.5">📅 Feb 22, 2026</span>
+         <span class="inline-flex items-center gap-1.5">⏱ 6 min read</span>
+        </p>
+        <h3 class="text-3xl leading-tight font-heading font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-success transition-colors">Essential Creator Tools You Actually Need</h3>
+        <p class="text-gray-400 text-base leading-relaxed mb-5 line-clamp-3">A curated stack for content, email capture, automation, and affiliate reporting.</p>
+        <div class="mt-auto flex items-center justify-between">
          <div class="flex flex-wrap gap-2">
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Tools</span>
           <span class="text-xs bg-dark-700 px-2 py-1 rounded-md text-gray-300">Productivity</span>
