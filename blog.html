@@ -26,6 +26,50 @@
   <style>
     .gradient-text { background: linear-gradient(135deg, #6366f1, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .card-glow:hover { box-shadow: 0 0 40px rgba(99, 102, 241, 0.15); }
+    
+    /* Scroll animation styles */
+    .article-card {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .article-card.hidden {
+      opacity: 0;
+      transform: translateY(-30px);
+      pointer-events: none;
+      position: absolute;
+      visibility: hidden;
+    }
+    
+    .article-card.fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .articles-grid {
+      position: relative;
+      min-height: 600px;
+    }
+    
+    .loading-indicator {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .loading-indicator.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-gray-100 font-body">
@@ -41,9 +85,9 @@
       <h1 class="text-4xl sm:text-5xl font-heading font-bold mb-2">Latest Articles</h1>
       <p class="text-gray-400 mb-10">Tutorials and resources to help you master email marketing.</p>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div id="articles-grid" class="grid md:grid-cols-2 gap-8 articles-grid">
         <!-- Article 1 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="0">
           <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=1200&q=80" alt="Laptop and email dashboard" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -59,7 +103,7 @@
         </article>
 
         <!-- Article 2 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="1">
           <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80" alt="Code and analytics screen" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -75,7 +119,7 @@
         </article>
 
         <!-- Article 3 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="2">
           <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80" alt="Business growth charts on laptop" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -91,7 +135,7 @@
         </article>
 
         <!-- Article 4 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="3">
           <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80" alt="Team planning marketing strategy" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -107,7 +151,7 @@
         </article>
 
         <!-- Article 5 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="4">
           <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200&q=80" alt="Team celebrating success" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -123,7 +167,7 @@
         </article>
 
         <!-- Article 6 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="5">
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="Data analytics dashboard" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -139,7 +183,7 @@
         </article>
 
         <!-- Article 7 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="6">
           <img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=1200&q=80" alt="Mail sorting facility" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -155,7 +199,7 @@
         </article>
 
         <!-- Article 8 -->
-        <article class="bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow">
+        <article class="article-card bg-dark-800 border border-dark-600 rounded-2xl overflow-hidden card-glow" data-index="7">
           <img src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1200&q=80" alt="Coins and calculator" class="w-full h-56 object-cover">
           <div class="p-6">
             <div class="flex items-center gap-2 mb-3">
@@ -170,11 +214,110 @@
           </div>
         </article>
       </div>
+
+      <!-- Loading indicator -->
+      <div id="loading" class="loading-indicator flex justify-center py-8">
+        <div class="flex items-center gap-2 text-gray-400">
+          <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>Loading more articles...</span>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer class="bg-dark-800 border-t border-dark-600 py-8 text-center text-gray-500 text-sm">
     <p>© 2026 CPAInbox. All rights reserved.</p>
   </footer>
+
+  <script>
+    (function() {
+      const INITIAL_COUNT = 6;
+      const FADE_DISTANCE = 200; // pixels from bottom to trigger fade-in
+      
+      const cards = document.querySelectorAll('.article-card');
+      const loading = document.getElementById('loading');
+      let visibleCount = INITIAL_COUNT;
+      let isAnimating = false;
+
+      // Initialize: hide cards beyond initial count
+      function init() {
+        cards.forEach((card, index) => {
+          if (index >= INITIAL_COUNT) {
+            card.classList.add('hidden');
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // Show more cards with animation
+      function showMoreCards() {
+        if (visibleCount >= cards.length || isAnimating) return;
+        
+        isAnimating = true;
+        loading.classList.add('visible');
+        
+        // Get next batch of cards
+        const nextCards = [];
+        for (let i = visibleCount; i < Math.min(visibleCount + 2, cards.length); i++) {
+          nextCards.push(cards[i]);
+        }
+        
+        // Show each card with stagger
+        nextCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.display = 'block';
+            // Force reflow
+            card.offsetHeight;
+            card.classList.remove('hidden');
+            card.classList.add('fade-in');
+            
+            // Remove animation class after it completes
+            setTimeout(() => {
+              card.classList.remove('fade-in');
+            }, 600);
+            
+            // Check if we're done
+            if (visibleCount + nextCards.length >= cards.length) {
+              loading.classList.remove('visible');
+              isAnimating = false;
+            }
+          }, index * 200); // Stagger delay
+        });
+        
+        visibleCount += nextCards.length;
+      }
+
+      // Handle scroll
+      let scrollTimeout;
+      function handleScroll() {
+        if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+        
+        scrollTimeout = requestAnimationFrame(() => {
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight;
+          const clientHeight = document.documentElement.clientHeight;
+          
+          // Check if near bottom
+          const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+          
+          if (distanceFromBottom < FADE_DISTANCE) {
+            showMoreCards();
+          }
+        });
+      }
+
+      // Initialize
+      init();
+      
+      // Add scroll listener
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Also check on load in case user is already scrolled
+      setTimeout(handleScroll, 100);
+    })();
+  </script>
 </body>
 </html>
