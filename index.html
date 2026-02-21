@@ -25,15 +25,18 @@
     const db = getFirestore(app);
 
     window.saveSubscriber = async function(email) {
+      console.log("saveSubscriber called with:", email);
       try {
-        await addDoc(collection(db, "subscribers"), {
+        const docRef = await addDoc(collection(db, "subscribers"), {
           email: email,
           subscribedAt: serverTimestamp(),
           status: "active"
         });
+        console.log("Document written with ID:", docRef.id);
         return { success: true };
       } catch (error) {
         console.error("Error saving subscriber:", error);
+        alert("Error: " + error.message);
         return { success: false, error: error.message };
       }
     };
@@ -279,6 +282,7 @@
       event.preventDefault();
       const emailInput = document.getElementById('email-input');
       const email = emailInput.value;
+      console.log("Form submitted with email:", email);
       const btn = event.target.querySelector('button');
       
       btn.disabled = true;
