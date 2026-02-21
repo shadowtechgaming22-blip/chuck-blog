@@ -6,6 +6,38 @@
   <title>CPAInbox - Email Marketing for Creators | Best Tools &amp; Strategies</title>
   <meta name="description" content="Discover the best email marketing software for creators. Compare ConvertKit, ActiveCampaign & more. Get exclusive deals and monetize your list.">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCCdplIvlekRRC17ACfrEVaxEfkDLzUGwA",
+      authDomain: "cpainbox-c3815.firebaseapp.com",
+      projectId: "cpainbox-c3815",
+      storageBucket: "cpainbox-c3815.firebasestorage.app",
+      messagingSenderId: "909678493730",
+      appId: "1:909678493730:web:40ebed41c91920f5684a7b",
+      measurementId: "G-RGMW98G6EQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.saveSubscriber = async function(email) {
+      try {
+        await addDoc(collection(db, "subscribers"), {
+          email: email,
+          subscribedAt: serverTimestamp(),
+          status: "active"
+        });
+        return { success: true };
+      } catch (error) {
+        console.error("Error saving subscriber:", error);
+        return { success: false, error: error.message };
+      }
+    };
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -243,9 +275,27 @@
     function scrollToNewsletter() {
       document.getElementById('newsletter').scrollIntoView({ behavior: 'smooth' });
     }
-    function handleNewsletterSubmit(event) {
+    async function handleNewsletterSubmit(event) {
       event.preventDefault();
-      alert('Thanks for subscribing!');
+      const emailInput = document.getElementById('email-input');
+      const email = emailInput.value;
+      const btn = event.target.querySelector('button');
+      
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+      
+      const result = await window.saveSubscriber(email);
+      
+      if (result.success) {
+        emailInput.value = '';
+        alert('🎉 Thanks for subscribing! Check your inbox for the CPA Email Blueprint.');
+      } else {
+        alert('Something went wrong. Please try again.');
+        console.error(result.error);
+      }
+      
+      btn.disabled = false;
+      btn.textContent = 'Get Free Access';
     }
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
