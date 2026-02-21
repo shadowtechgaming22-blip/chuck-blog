@@ -6,6 +6,36 @@
   <title>Blog - CPAInbox</title>
   <meta name="description" content="Latest tutorials and resources on email marketing for creators.">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Firebase Analytics -->
+  <script type="module">
+    import { initializeApp, getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCCdplIvlekRRC17ACfrEVaxEfkDLzUGwA",
+      authDomain: "cpainbox-c3815.firebaseapp.com",
+      projectId: "cpainbox-c3815",
+      storageBucket: "cpainbox-c3815.firebasestorage.app",
+      messagingSenderId: "909678493730",
+      appId: "1:909678493730:web:40ebed41c91920f5684a7b",
+      measurementId: "G-RGMW98G6EQ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    
+    // Track page view
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+    
+    window.trackArticleView = function(articleTitle) {
+      logEvent(analytics, 'article_view', {
+        article_title: articleTitle
+      });
+    };
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -61,7 +91,7 @@
             <a href="./article-email-marketing-for-coaches.html" class="hover:text-accent-primary transition-colors">Email Marketing for Coaches: The Complete Guide</a>
           </h2>
           <p class="text-gray-400 mb-4">How coaches can use email to attract clients, build trust, and grow their practice.</p>
-          <a href="./article-email-marketing-for-coaches.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+          <a href="./article-email-marketing-for-coaches.html" onclick="window.trackArticleView('Email Marketing for Coaches')" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
         </article>
 
         <!-- Article 2 -->
@@ -74,7 +104,7 @@
             <a href="./article-write-emails-people-read.html" class="hover:text-accent-primary transition-colors">How to Write Emails People Actually Read (Not Delete)</a>
           </h2>
           <p class="text-gray-400 mb-4">The secret to emails that get opened, read, and acted upon. No sleazy tactics.</p>
-          <a href="./article-write-emails-people-read.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+          <a href="./article-write-emails-people-read.html" onclick="window.trackArticleView('Write Emails People Actually Read')" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
         </article>
 
         <!-- Article 3 -->
@@ -100,7 +130,7 @@
             <a href="./article-grow-email-list.html" class="hover:text-accent-primary transition-colors">How to Grow Your Email List from Zero (Even with No Following)</a>
           </h2>
           <p class="text-gray-400 mb-4">A step-by-step guide to building your first email list from scratch. No followers or website required.</p>
-          <a href="./article-grow-email-list.html" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
+          <a href="./article-grow-email-list.html" onclick="window.trackArticleView('Grow Your Email List from Zero')" class="text-accent-primary hover:text-accent-secondary transition-colors">Read More →</a>
         </article>
 
         <!-- Article 2 -->

@@ -8,8 +8,9 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <!-- Firebase SDK -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { initializeApp, getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCCdplIvlekRRC17ACfrEVaxEfkDLzUGwA",
@@ -22,7 +23,23 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+    
+    // Track page views
+    logEvent(analytics, 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+    
+    window.trackEvent = function(eventName, params) {
+      logEvent(analytics, eventName, params);
+    };
+    
+    window.trackArticleView = function(articleTitle) {
+      logEvent(analytics, 'article_view', {
+        article_title: articleTitle
+      });
+    };
 
     window.saveSubscriber = async function(email) {
       console.log("saveSubscriber called with:", email);
@@ -289,6 +306,9 @@
       btn.textContent = 'Subscribing...';
       
       const result = await window.saveSubscriber(email);
+      
+      // Track subscription
+      window.trackEvent('subscribe', { method: 'newsletter' });
       
       if (result.success) {
         emailInput.value = '';
